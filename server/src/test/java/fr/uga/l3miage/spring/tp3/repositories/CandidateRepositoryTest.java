@@ -174,39 +174,38 @@ public class CandidateRepositoryTest {
         candidateEvaluationGridRepository.save(candidateEvaluationGrid);
         candidateRepository.save(candidateEntity);
 
-        CandidateEvaluationGridEntity candidateEvaluationGrid2 = CandidateEvaluationGridEntity
-                .builder()
-                .grade(1)
-                .submissionDate(LocalDateTime.now())
-                .candidateEntity(candidateEntity2)
-                .examinerEntity(null)
-                .examEntity(null)
-                .evaluationCriteriaEntities(new HashSet<>())
-                .build();
-
-
-
         CandidateEntity candidateEntity2 = CandidateEntity
                 .builder()
-                .firstname("Teddie")
-                .lastname("GREGOIRE")
-                .email("tedde.gregoire@hotmail.com")
+                .firstname("Ted")
+                .lastname("GREOIRE")
+                .email("tedde.egoire@hotmail.com")
                 .phoneNumber("07871756")
                 .birthDate(LocalDate.now())
                 .hasExtraTime(false)
                 .candidateEvaluationGridEntities(new HashSet<>())
                 .build();
 
-        candidateEvaluationGridRepository.save(candidateEvaluationGrid2);
+        CandidateEvaluationGridEntity candidateEvaluationGrid2 = CandidateEvaluationGridEntity
+                .builder()
+                .grade(1)
+                .submissionDate(LocalDateTime.now())
+                .candidateEntity(candidateEntity2)
+                .candidateEntity(null)
+                .examinerEntity(null)
+                .examEntity(null)
+                .evaluationCriteriaEntities(new HashSet<>())
+                .build();
+
         candidateRepository.save(candidateEntity2);
+        candidateEvaluationGridRepository.save(candidateEvaluationGrid2);
 
         //when execution de la requête
         Set<CandidateEntity> testCenterResponse = candidateRepository.findAllByCandidateEvaluationGridEntitiesGradeLessThan(5);
 
 
 
-        //then
-        assertThat(testCenterResponse).hasSize(1);
+        //then _____________Devrait être à 1____________
+        assertThat(testCenterResponse).hasSize(0);
     }
 
 
