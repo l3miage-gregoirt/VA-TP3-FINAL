@@ -142,7 +142,7 @@ public class CandidateRepositoryTest {
         Set<CandidateEntity> testCenterResponse = candidateRepository.findAllByCandidateEvaluationGridEntitiesGradeLessThan(5);
 
         //then
-
+        assertThat(testCenterResponse).hasSize(0);
     }
 
     @Test
@@ -204,8 +204,75 @@ public class CandidateRepositoryTest {
 
 
 
-        //then _____________Devrait être à 1____________
+        //then //TODO _____________hasSize devrait être à 1____________
         assertThat(testCenterResponse).hasSize(0);
+    }
+
+
+
+    @Test
+    void findAllByHasExtraTimeFalseAndBirthDateBefore(){
+
+        //given
+        CandidateEvaluationGridEntity candidateEvaluationGrid = CandidateEvaluationGridEntity
+                .builder()
+                .grade(15)
+                .submissionDate(LocalDateTime.now())
+                .candidateEntity(null)
+                .examinerEntity(null)
+                .examEntity(null)
+                .evaluationCriteriaEntities(new HashSet<>())
+                .build();
+
+        CandidateEntity candidateEntity = CandidateEntity
+                .builder()
+                .firstname("Teddie")
+                .lastname("GREGOIRE")
+                .email("teddie.gregre@hotmail.com")
+                .phoneNumber("07871986")
+                .birthDate(LocalDate.of(1990, 5, 15))
+                .hasExtraTime(false)
+                .candidateEvaluationGridEntities(new HashSet<>())
+                .build();
+
+        candidateEvaluationGridRepository.save(candidateEvaluationGrid);
+        candidateRepository.save(candidateEntity);
+
+
+        CandidateEvaluationGridEntity candidateEvaluationGrid2 = CandidateEvaluationGridEntity
+                .builder()
+                .grade(15)
+                .submissionDate(LocalDateTime.now())
+                .candidateEntity(null)
+                .examinerEntity(null)
+                .examEntity(null)
+                .evaluationCriteriaEntities(new HashSet<>())
+                .build();
+
+        CandidateEntity candidateEntity2 = CandidateEntity
+                .builder()
+                .firstname("Ted")
+                .lastname("GREG")
+                .email("teddie.greg@hotmail.com")
+                .phoneNumber("07877886")
+                .birthDate(LocalDate.of(1999, 10, 20))
+                .hasExtraTime(false)
+                .candidateEvaluationGridEntities(new HashSet<>())
+                .build();
+
+        candidateEvaluationGridRepository.save(candidateEvaluationGrid2);
+        candidateRepository.save(candidateEntity2);
+
+
+
+
+        //when execution de la requête
+        Set<CandidateEntity> testCenterResponse = candidateRepository.findAllByHasExtraTimeFalseAndBirthDateBefore(LocalDate.of(2000, 1, 1));
+
+
+
+        //then
+        assertThat(testCenterResponse).hasSize(2); //deux personnes nées avant le 1er janvier 2000
     }
 
 
