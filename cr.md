@@ -1,2 +1,3 @@
-Binome : GREGOIRE Teddie
-         DUMAS Loïc
+Contributeurs:
+DUMAS Loïc
+GREGOIRE Teddie
