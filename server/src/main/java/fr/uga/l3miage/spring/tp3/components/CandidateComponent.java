@@ -25,6 +25,8 @@ public class CandidateComponent {
     }
 
 
+
+
     public CandidateEntity getCandidatById(Long id) throws CandidateNotFoundException {
        return candidateRepository.findById(id).orElseThrow(()-> new CandidateNotFoundException(String.format("Le candidat [%s] n'a pas été trouvé",id),id));
     }
