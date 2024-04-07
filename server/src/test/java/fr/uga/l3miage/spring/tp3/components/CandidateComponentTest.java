@@ -28,7 +28,7 @@ public class CandidateComponentTest {
     private CandidateRepository candidateRepository;
 
     @Test
-    void getCandidateAverageTest(){
+    void getCandidatByIdTest(){
         //Given
 
         TestCenterEntity testCenter = TestCenterEntity
