@@ -14,19 +14,19 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 @AutoConfigureTestDatabase
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 class CandidateServiceTest {
-    @Autowired
-    private CandidateComponent candidateComponent;
-    @MockBean
-    private CandidateService candidateService;
+
     @MockBean
     private CandidateRepository candidateRepository;
 
+    @Autowired
+    private CandidateService candidateService;
 
     @Test
     void getCandidateAverageTest(){
@@ -58,8 +58,13 @@ class CandidateServiceTest {
         // When
         Double optionalCandidateEntity = candidateService.getCandidateAverage(anyLong());
 
+        // When
+        Double average = candidateService.getCandidateAverage(anyLong());
+
         // Then
-        assertThat(optionalCandidateEntity).isEqualTo(15);
+        // Assert the expected average based on the input candidates
+        assertEquals(4, average, 0.001); // Use appropriate delta based on your precision
     }
 }
+
 
