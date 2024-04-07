@@ -95,7 +95,7 @@ class CandidateServiceTest {
         Double average = candidateService.getCandidateAverage(12L);
 
         // Then
-        // assertEquals(5, average, 0.01); TODO devrait fonctionner
+//        assertEquals(5, average, 0.01); //TODO devrait fonctionner
     }
 }
 
