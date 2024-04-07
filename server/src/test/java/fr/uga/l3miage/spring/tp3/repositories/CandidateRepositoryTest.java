@@ -32,6 +32,7 @@ public class CandidateRepositoryTest {
     void clean(){
         candidateRepository.deleteAll();
         testCenterRepository.deleteAll();
+        candidateEvaluationGridRepository.deleteAll();
     }
     @Test
     void testRequestFindAllByTestCenterEntityCode(){
