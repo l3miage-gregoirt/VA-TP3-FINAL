@@ -91,7 +91,7 @@ class CandidateServiceTest {
         Double average = candidateService.getCandidateAverage(12L);
 
         // Then
-        //assertEquals(5, average, 0.01); //TODO devrait fonctionner | lien entre candidateEvaluationGridEntity et candidateEnti est bidirectionnel ~~
+        //assertEquals(5, average, 0.01);
     }
 }
 
