@@ -1,6 +1,8 @@
 package fr.uga.l3miage.spring.tp3.controllers;
 import fr.uga.l3miage.spring.tp3.components.CandidateComponent;
-import org.springframework.http.HttpHeaders;
+import fr.uga.l3miage.spring.tp3.repositories.ExamRepository;
+import fr.uga.l3miage.spring.tp3.responses.EcosSessionProgrammationResponse;
+import org.springframework.http.*;
 import fr.uga.l3miage.spring.tp3.repositories.CandidateRepository;
 import fr.uga.l3miage.spring.tp3.request.SessionCreationRequest;
 import fr.uga.l3miage.spring.tp3.request.SessionProgrammationCreationRequest;
@@ -12,8 +14,11 @@ import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWeb
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+
 import java.time.LocalDateTime;
 import java.util.HashSet;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @AutoConfigureTestDatabase
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -23,7 +28,7 @@ public class CandidateControllerTest {
     private TestRestTemplate testRestTemplate;
 
     @Autowired
-    private CandidateRepository candidateRepository;
+    private ExamRepository examRepository;
 
     @SpyBean
     private CandidateComponent candidateComponent;
@@ -57,6 +62,19 @@ public class CandidateControllerTest {
                 .examsId(new HashSet<>())
                 .ecosSessionProgrammation(request2)
                 .build();
+
+
+
+
+
+        // when
+        ResponseEntity<EcosSessionProgrammationResponse> response = testRestTemplate.exchange("/api/session/create", HttpMethod.POST, new HttpEntity<>(request3, headers), EcosSessionProgrammationResponse.class);
+
+
+        //then
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);// ne fonctionne pas
+
+
     }
 
 
