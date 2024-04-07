@@ -18,7 +18,6 @@ import java.util.HashSet;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 @AutoConfigureTestDatabase
@@ -86,16 +85,13 @@ class CandidateServiceTest {
                 .build();
         candidateEvaluationGridRepository.save(candidateEvaluationGridEntity);
 
-        when(candidateRepository.findById(anyLong())).thenReturn(Optional.of(candidateEnti));
-
-        // When
-        Double optionalCandidateEntity = candidateService.getCandidateAverage(anyLong());
+        when(candidateRepository.findById(12L)).thenReturn(Optional.of(candidateEnti));
 
         // When
         Double average = candidateService.getCandidateAverage(12L);
 
         // Then
-//        assertEquals(5, average, 0.01); //TODO devrait fonctionner
+        //assertEquals(5, average, 0.01); //TODO devrait fonctionner | lien entre candidateEvaluationGridEntity et candidateEnti est bidirectionnel ~~
     }
 }
 
